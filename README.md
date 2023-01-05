@@ -1,4 +1,4 @@
-# flutter_application_1
+# Youtube Search Detailer
 
 A new Flutter project.
 
