@@ -25,6 +25,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
   YoutubeAPI youtubeChannel = YoutubeAPI(key, maxResults: 3, type: 'channel');
   FutureOr<String> searchChannels() async {
+    if (widget.channelUrl != "") {
     String query = widget.channelUrl;
     List<YouTubeVideo> result = await youtubeChannel.search(
       query,
@@ -32,6 +33,8 @@ class _SearchResultPageState extends State<SearchResultPage> {
     );
     String channelId = result.elementAt(0).channelId ?? '';
     return channelId;
+  }
+    return "";
   }
 
   YoutubeAPI youtubeVideo = YoutubeAPI(key, maxResults: 15, type: 'video');
@@ -42,9 +45,11 @@ class _SearchResultPageState extends State<SearchResultPage> {
       type: 'video',
       channelId: channelId,
     );
+    if (channelId != "") {
     videoResult
         .removeWhere((YouTubeVideo video) => video.channelId != channelId);
     setState(() {});
+    }
   }
 
   @override
