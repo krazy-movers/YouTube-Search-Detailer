@@ -12,6 +12,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final keywordController = TextEditingController();
+  final channelUrlController = TextEditingController();
+  final movieLengthController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,27 +32,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.search),
                     onPressed: () {
-                      final text = keywordController.text;
-                      if (text.isNotEmpty) {
+                      final keyword = keywordController.text;
+                      final channelUrl = channelUrlController.text;
+                      final movieLength = movieLengthController.text;
+
+                      if (keyword.isNotEmpty) {
                         final snackBar = SnackBar(
-                          content: Text('$text検索します'),
+                          content: Text('$keyword検索します'),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SearchResultPage(text),
+                            builder: (context) => SearchResultPage(
+                                keyword, channelUrl, movieLength),
                           ),
                         );
                       }
                     },
                   ),
                 )),
-            const TextField(
-              decoration: InputDecoration(labelText: 'チャンネルURL'),
+            TextField(
+              controller: channelUrlController,
+              decoration: const InputDecoration(labelText: 'チャンネルURL'),
             ),
-            const TextField(
-              decoration: InputDecoration(labelText: '動画の長さ'),
+            TextField(
+              controller: movieLengthController,
+              decoration: const InputDecoration(labelText: '動画の長さ'),
             ),
             const TextField(
               decoration: InputDecoration(labelText: '投稿からの経過時間'),
