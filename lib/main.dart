@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/home.dart';
+import 'package:youtube_search_detailer/screens/home.dart';
 
 void main() {
   runApp(const MyApp());
