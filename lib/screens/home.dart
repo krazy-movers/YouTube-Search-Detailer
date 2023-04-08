@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       if (keyword.isNotEmpty) {
                         final snackBar = SnackBar(
-                          content: Text('$keyword検索します'),
+                          content: Text('｢$keyword｣を検索します'),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.push(
