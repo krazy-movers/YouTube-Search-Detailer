@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
 import 'package:xml/xml.dart';
@@ -48,8 +47,11 @@ class _SearchResultPageState extends State<SearchResultPage> {
     if (channelId != "") {
     videoResult
         .removeWhere((YouTubeVideo video) => video.channelId != channelId);
-    setState(() {});
     }
+    setState(() {
+      channelResult = channelResult;
+      videoResult = videoResult;
+    });
   }
 
   @override
