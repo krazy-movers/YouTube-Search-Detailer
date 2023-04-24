@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
 
@@ -16,10 +17,36 @@ class _SearchResultPageState extends State<SearchResultPage> {
   YoutubeAPI youtube = YoutubeAPI(key, maxResults: 15, type: 'video');
   List<YouTubeVideo> videoResult = [];
 
-  Future<void> callAPI() async {
-    String query = widget.searchWord;
-    videoResult = await youtube.search(query);
-    setState(() {});
+  YoutubeAPI youtubeChannel = YoutubeAPI(key, maxResults: 3, type: 'channel');
+  FutureOr<String> searchChannels() async {
+    if (widget.channelUrl != "") {
+      String query = widget.channelUrl;
+      List<YouTubeVideo> result = await youtubeChannel.search(
+        query,
+        type: 'channel',
+      );
+      String channelId = result.elementAt(0).channelId ?? '';
+      return channelId;
+    }
+    return "";
+  }
+
+  YoutubeAPI youtubeVideo = YoutubeAPI(key, maxResults: 15, type: 'video');
+  Future<void> searchVideo(String? channelId) async {
+    String query = widget.keyword;
+    videoResult = await youtubeVideo.search(
+      query,
+      type: 'video',
+      channelId: channelId,
+    );
+    if (channelId != "") {
+      videoResult
+          .removeWhere((YouTubeVideo video) => video.channelId != channelId);
+    }
+    setState(() {
+      channelResult = channelResult;
+      videoResult = videoResult;
+    });
   }
 
   @override
