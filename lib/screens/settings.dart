@@ -6,8 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
 import 'search_result.dart';
 import 'home.dart';
-/*
-class SettingsPage extends StatefulWidget {}
+
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<SettingsPage> createState() => _SeettingsPageState();
+}
 
 class _SeettingsPageState extends State<SettingsPage> {
   @override
@@ -46,4 +53,3 @@ class _SeettingsPageState extends State<SettingsPage> {
     );
   }
 }
-*/

@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       home: const MyHomePage(title: 'YouTube Search Detailer'),
-      intitialRoute: '/',
+      initialRoute: '/',
       routes: {
-        '/': (context) => home(),
-        '/result': (context) => search_result(),
-        '/settings': (context) => settings(),
+        '/result': (context) => SearchResultPage(''),
+        '/settings': (context) =>
+            const SettingsPage(title: 'YouTube Search Detailer'),
       },
       /*
       onPressed: () {
