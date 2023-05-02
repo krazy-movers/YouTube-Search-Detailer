@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_search_detailer/screens/home.dart';
+import 'screens/home.dart';
+import 'screens/search_result.dart';
+import 'screens/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +18,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       home: const MyHomePage(title: 'YouTube Search Detailer'),
+      initialRoute: '/',
+      routes: {
+        '/result': (context) => SearchResultPage('', '', '100'),
+        '/settings': (context) =>
+            const SettingsPage(title: 'YouTube Search Detailer'),
+      },
+      /*
+      onPressed: () {
+        Navigator.pushNamed(context, '/settings'); // 移動したい画面の名前を設定する
+      },
+      */
     );
   }
 }
