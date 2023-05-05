@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // ignore: must_be_immutable
 class SearchResultPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class SearchResultPage extends StatefulWidget {
 }
 
 class _SearchResultPageState extends State<SearchResultPage> {
-  static String key = "{APIKey}";
+  static String key = dotenv.get('YOUTUBE_API_KEY');
 
   List<YouTubeVideo> channelResult = [];
   List<YouTubeVideo> videoResult = [];
