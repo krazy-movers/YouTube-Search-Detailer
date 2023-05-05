@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'screens/home.dart';
 import 'screens/search_result.dart';
 import 'screens/settings.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
