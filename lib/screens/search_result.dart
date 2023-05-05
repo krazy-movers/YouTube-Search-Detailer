@@ -16,7 +16,7 @@ class SearchResultPage extends StatefulWidget {
 }
 
 class _SearchResultPageState extends State<SearchResultPage> {
-  static String key = "AIzaSyAwk64s2tNCMFmOA0Ubt4cbGzzlwwtxBMs";
+  static String key = "{apiKey}";
 
   List<YouTubeVideo> channelResult = [];
   List<YouTubeVideo> videoResult = [];
