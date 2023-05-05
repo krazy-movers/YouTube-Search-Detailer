@@ -2,9 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
 
+// ignore: must_be_immutable
 class SearchResultPage extends StatefulWidget {
-  String searchWord = "";
-  SearchResultPage(this.searchWord, {super.key});
+  String keyword = "";
+  String channelUrl = "";
+  String movieLength = "";
+  SearchResultPage(this.keyword, this.channelUrl, this.movieLength,
+      {super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -12,9 +16,9 @@ class SearchResultPage extends StatefulWidget {
 }
 
 class _SearchResultPageState extends State<SearchResultPage> {
-  static String key = "{apikey}";
+  static String key = "AIzaSyAwk64s2tNCMFmOA0Ubt4cbGzzlwwtxBMs";
 
-  YoutubeAPI youtube = YoutubeAPI(key, maxResults: 15, type: 'video');
+  List<YouTubeVideo> channelResult = [];
   List<YouTubeVideo> videoResult = [];
 
   YoutubeAPI youtubeChannel = YoutubeAPI(key, maxResults: 3, type: 'channel');
@@ -52,7 +56,10 @@ class _SearchResultPageState extends State<SearchResultPage> {
   @override
   void initState() {
     super.initState();
-    callAPI();
+    Future(() async {
+      String channelId = await searchChannels();
+      searchVideo(channelId);
+    });
   }
 
   @override
@@ -93,7 +100,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                     style: const TextStyle(fontSize: 18.0),
                   ),
                   Text(
-                    video.url,
+                    video.channelId ?? '',
                     softWrap: true,
                   ),
                 ],
