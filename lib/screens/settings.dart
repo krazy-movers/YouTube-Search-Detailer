@@ -27,25 +27,14 @@ class _SeettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            ListView(
-              padding: const EdgeInsets.all(8),
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  color: Colors.amber[600],
-                  child: const Center(child: Text('Entry A')),
-                ),
-                Container(
-                  height: 50,
-                  color: Colors.amber[500],
-                  child: const Center(child: Text('Entry B')),
-                ),
-                Container(
-                  height: 50,
-                  color: Colors.amber[100],
-                  child: const Center(child: Text('Entry C')),
-                ),
-              ],
+            TextField(
+              decoration: InputDecoration(labelText: '設定項目1'),
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: '設定項目2'),
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: '設定項目3'),
             ),
           ],
         ),

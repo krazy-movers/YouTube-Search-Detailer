@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_search_detailer/screens/search_result.dart';
+import 'package:youtube_search_detailer/screens/settings.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -70,10 +71,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   TextButton(
                       onPressed: () {
+                        final title = "設定画面";
                         const snackBar = SnackBar(
                           content: Text('設定ボタンが押下されました'),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsPage(
+                                    title: title,
+                                  )),
+                        );
                       },
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.white,

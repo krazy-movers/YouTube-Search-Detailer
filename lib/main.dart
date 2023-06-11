@@ -26,11 +26,6 @@ class MyApp extends StatelessWidget {
         '/settings': (context) =>
             const SettingsPage(title: 'YouTube Search Detailer'),
       },
-      /*
-      onPressed: () {
-        Navigator.pushNamed(context, '/settings'); // 移動したい画面の名前を設定する
-      },
-      */
     );
   }
 }
