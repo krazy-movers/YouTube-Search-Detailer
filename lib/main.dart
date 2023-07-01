@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'YouTube Search Detailer'),
       initialRoute: '/',
       routes: {
-        '/result': (context) => SearchResultPage('', '', '100'),
+        '/result': (context) => SearchResultPage('', '', '100', ''),
         '/settings': (context) =>
             const SettingsPage(title: 'YouTube Search Detailer'),
       },
