@@ -15,6 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final keywordController = TextEditingController();
   final channelUrlController = TextEditingController();
   final movieLengthController = TextEditingController();
+  final ignoreController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       final keyword = keywordController.text;
                       final channelUrl = channelUrlController.text;
                       final movieLength = movieLengthController.text;
+                      final ignore = ignoreController.text;
 
                       if (keyword.isNotEmpty) {
                         final snackBar = SnackBar(
@@ -46,13 +48,17 @@ class _MyHomePageState extends State<MyHomePage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => SearchResultPage(
-                                keyword, channelUrl, movieLength),
+                                keyword, channelUrl, movieLength, ignore),
                           ),
                         );
                       }
                     },
                   ),
                 )),
+            TextField(
+              controller: ignoreController,
+              decoration: const InputDecoration(labelText: '含まない'),
+            ),
             TextField(
               controller: channelUrlController,
               decoration: const InputDecoration(labelText: 'チャンネルURL'),

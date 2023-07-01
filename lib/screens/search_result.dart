@@ -8,7 +8,8 @@ class SearchResultPage extends StatefulWidget {
   String keyword = "";
   String channelUrl = "";
   String movieLength = "";
-  SearchResultPage(this.keyword, this.channelUrl, this.movieLength,
+  String ignore = "";
+  SearchResultPage(this.keyword, this.channelUrl, this.movieLength, this.ignore,
       {super.key});
 
   @override
@@ -37,7 +38,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   YoutubeAPI youtubeVideo = YoutubeAPI(key, maxResults: 15, type: 'video');
-  Future<void> searchVideo(String? channelId) async {
+  Future<void> searchVideo(String? channelId, String? ignoreWord) async {
     String query = widget.keyword;
     videoResult = await youtubeVideo.search(
       query,
@@ -48,6 +49,12 @@ class _SearchResultPageState extends State<SearchResultPage> {
       videoResult
           .removeWhere((YouTubeVideo video) => video.channelId != channelId);
     }
+    // 無視する単語がある場合は、その単語を含む動画を除外する
+    if (ignoreWord != "") {
+      videoResult.removeWhere(
+          (YouTubeVideo video) => video.title.contains(ignoreWord!));
+    }
+
     setState(() {
       channelResult = channelResult;
       videoResult = videoResult;
@@ -59,7 +66,8 @@ class _SearchResultPageState extends State<SearchResultPage> {
     super.initState();
     Future(() async {
       String channelId = await searchChannels();
-      searchVideo(channelId);
+      String ignoreWord = widget.ignore;
+      searchVideo(channelId, ignoreWord);
     });
   }
 
