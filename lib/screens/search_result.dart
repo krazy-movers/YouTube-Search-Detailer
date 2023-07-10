@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class SearchResultPage extends StatefulWidget {
@@ -18,6 +20,15 @@ class SearchResultPage extends StatefulWidget {
 }
 
 class _SearchResultPageState extends State<SearchResultPage> {
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   static String key = dotenv.get('YOUTUBE_API_KEY');
 
   List<YouTubeVideo> channelResult = [];
@@ -85,39 +96,42 @@ class _SearchResultPageState extends State<SearchResultPage> {
   }
 
   Widget listItem(YouTubeVideo video) {
-    return Card(
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 7.0),
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: Image.network(
-                video.thumbnail.small.url ?? '',
-                width: 120.0,
+    return GestureDetector(
+      child: Card(
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 7.0),
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 20.0),
+                child: Image.network(
+                  video.thumbnail.small.url ?? '',
+                  width: 120.0,
+                ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    video.title,
-                    softWrap: true,
-                    style: const TextStyle(fontSize: 18.0),
-                  ),
-                  Text(
-                    video.channelId ?? '',
-                    softWrap: true,
-                  ),
-                ],
-              ),
-            )
-          ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      video.title,
+                      softWrap: true,
+                      style: const TextStyle(fontSize: 18.0),
+                    ),
+                    Text(
+                      video.channelId ?? '',
+                      softWrap: true,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
+      onTap: () => _launchInBrowser(Uri.parse(video.url)),
     );
   }
 }
