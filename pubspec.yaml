@@ -38,6 +38,7 @@ dependencies:
   youtube_api:
     path: ../youtube_api
   flutter_dotenv: ^5.0.2
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:
